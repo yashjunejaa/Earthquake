@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
@@ -35,9 +37,30 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
         t1.setText(""+e.getMagnitude());
         TextView t2=item.findViewById(R.id.loc);
         t2.setText(e.getLocation());
-        TextView t3= item.findViewById(R.id.date);
-        t3.setText(e.getDate());
+        long time=e.getDate();
+        Date d= new Date(time);
+        TextView date = (TextView)item.findViewById(R.id.date);
+        date.setText(formatDate(d));
+        TextView t = (TextView)item.findViewById(R.id.t);
+        t.setText(formatTime(d));
+
 
         return item;
+    }
+
+    /**
+     * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
+     */
+    private String formatDate(Date dateObject) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
+        return dateFormat.format(dateObject);
+    }
+
+    /**
+     * Return the formatted date string (i.e. "4:30 PM") from a Date object.
+     */
+    private String formatTime(Date dateObject) {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        return timeFormat.format(dateObject);
     }
 }
