@@ -58,8 +58,8 @@ public final class QueryUtils {
                 double mag = prop.optDouble("mag");
                 String loc = prop.optString("place");
                 long time = prop.optLong("time");
-
-                earthquakes.add(new Earthquake(mag, loc, time));
+                String url = prop.optString("url");
+                earthquakes.add(new Earthquake(mag, loc, time, url));
             }
             // build up a list of Earthquake objects with the corresponding data.
 
